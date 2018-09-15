@@ -1,0 +1,33 @@
+<extend name="Public/base" />
+<block name="body">
+    <notempty name="devicelist">
+        <div class="complaintlist">
+            <volist name="devicelist" id="vo">
+                <div class="item" onclick="javascript:;window.location.href='__URL__/devicedetail/id/{$vo.id}'">
+                    <div class="info">
+                        <div class="content">{$vo.content} </div>
+                        <p class="time">{$vo.create_time}</p>
+                    </div>
+                    <div class="status">
+                        <eq name="vo.status" value="0">
+                            <span style="color: red;">待处理</span>
+                            <else/>
+                            <span style="color: green;">已处理</span>
+                        </eq>
+                    </div>
+                </div>
+            </volist>
+        </div>
+        <else/>
+        <p class="msg">你还设备报修记录</p>
+    </notempty>
+    <div class="addcom" onclick="javascript:;window.location.href='{:U(adddevice)}'">
+        我要报修设备
+    </div>
+</block>
+<block name="script">
+    <script>
+    // console.log($(window).height());
+    $(".complaintlist").css("height", $(window).height() - 135);
+    </script>
+</block>

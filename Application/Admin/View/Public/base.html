@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{$companyinfo['company_name']}|{$meta_title}</title>
+    <link href="/Public/images/ico.png" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/base.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/layui/css/layui.css">
+    <script type="text/javascript" src="__PUBLIC__/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/common.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/layui/layui.js"></script>
+    <block name="style"></block>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <div class="header">
+        <ul class="main_menu">
+            <volist name="menu_nav" id="vo">
+                <li class="{$vo.controller}_nav" onclick="javascript:;window.location.href='{:U($vo['url'])}'">{$vo.title}</li>
+            </volist>
+        </ul>
+        <div class="userbox">
+            <img src="__PUBLIC__/images/avatar/{$admininfo['avatarurl']}" onerror="javascript:;this.src='__PUBLIC__/images/avatar.jpg'">
+            <div class="useroption">
+                <p>欢迎您：{$admininfo['nickname']}</p>
+                <p class="option edit_option" data-href="{:U('User/adminedit?flag=1&uid='.$admininfo['uid'])}" data-title="修改昵称">修改昵称</p>
+                <p class="option edit_option" data-href="{:U('User/adminedit?flag=2&uid='.$admininfo['uid'])}" data-title="修改密码">修改密码</p>
+                <p class="option edit_option" data-href="{:U('User/adminedit?flag=3&uid='.$admininfo['uid'])}" data-title="更换头像">更换头像</p>
+                <p class="option" id="login_out">退出</p>
+            </div>
+        </div>
+    </div>
+    <!-- /头部 -->
+    <!-- 边栏 -->
+    <div class="sidebar">
+        <block name="sidebar">
+            <notempty name="menus">
+                <volist name="menus" id='vo'>
+                    <volist name='vo' id="v" key="index">
+                        <eq name="index" value="1">
+                            <notempty name='v.group'>
+                                <p>{$v.group}</p>
+                                <else/>
+                                <!-- <hr/> -->
+                                <p>{$v.title}</p>
+                            </notempty>
+                            <li><a class="menu{$v.option}" href="__URL__/../{$v.url}.html">{$v.title}</a></li>
+                            <else/>
+                            <li><a class="menu{$v.option}" href="__URL__/../{$v.url}.html">{$v.title}</a></li>
+                        </eq>
+                    </volist>
+                </volist>
+            </notempty>
+        </block>
+    </div>
+    <!-- /边栏 -->
+    <!-- 内容区 -->
+    <div class="content">
+        <block name="body"></block>
+        <div class="bottom">
+            <p>{$companyinfo['company_name']}小区物业管理系统</p>
+            <p>©CopyRight 2018-2018 All Rights Reserved</p>
+        </div>
+    </div>
+    <block name="script"></block>
+</body>
+<script type="text/javascript">
+var controller = '{$controller}';
+
+$(".userbox").mousemove(function() {
+    $(".useroption").show();
+})
+
+$(".userbox").mouseout(function() {
+    $(".useroption").hide();
+})
+
+var option = "<?php echo $option?>";
+$(".menu" + option).attr("class", "active");
+
+$(".sidebar").css("height", ($(window).height() - 100));
+$(".content").css("height", ($(window).height() - 100));
+$(".content-box").css("height", ($(window).height() - 180));
+
+$("#login_out").click(function() {
+
+    $.post("__URL__/../Login/loginout", "", function(res) {
+        location.reload();
+
+    })
+})
+</script>
+
+</html>

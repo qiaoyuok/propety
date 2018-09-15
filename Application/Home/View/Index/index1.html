@@ -1,0 +1,84 @@
+<extend name="Public/base" />
+<block name="style">
+    <style type="text/css">
+    #test2 div div {
+        background: #e6e6e6;
+        color: #d4237a;
+        overflow: hidden;
+    }
+    </style>
+</block>
+<block name="body">
+    <div class="layui-carousel" id="test1">
+        <div carousel-item>
+            <div><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526469152075&di=c71b6a9ef6fd262dea36158c9bfe90f1&imgtype=0&src=http%3A%2F%2Fpic34.photophoto.cn%2F20150310%2F0017030247988384_b.jpg"></div>
+            <div><img src="http://mpic.tiankong.com/114/6cc/1146cc774fb3929f1353ac00cd5932a5/640.jpg@!670w"></div>
+            <div><img src="http://img.mp.itc.cn/upload/20170316/9165c892d0af475495c46bf000fb803d_th.jpg"></div>
+        </div>
+    </div>
+    <div class="announce">
+        <img src="__PUBLIC__/images/laba.png">
+        <div class="layui-carousel" id="test2">
+            <div carousel-item>
+                <notempty name="announcelist">
+                    <volist name="announcelist" id="vo">
+                        <div onclick="javascript:;window.location.href='__URL__/announcedetail/id/{$vo.id}'">{$vo.title|strlendeal}</div>
+                    </volist>
+                    <else/>
+                    <div>暂无通知</div>
+                </notempty>
+            </div>
+        </div>
+    </div>
+    <div class="module">
+        <ul>
+            <li onclick="window.location.href='{:U(msg)}'"><img src="__PUBLIC__/images/msg.png">
+                <p>消息通知</p>
+            </li>
+            <li onclick="window.location.href='{:U(complaint)}'"><img src="__PUBLIC__/images/complaint.png">
+                <p>我的投诉</p>
+            </li>
+            <li onclick="window.location.href='{:U(device)}'"><img src="__PUBLIC__/images/device.png">
+                <p>设备报修</p>
+            </li>
+            <li onclick="window.location.href='{:U(my)}'"><img src="__PUBLIC__/images/my.png">
+                <p>个人中心</p>
+            </li>
+        </ul>
+    </div>
+    <div class="bottom">
+        <p>{$_SESSION['company']['company_name']}小区物业管理系统</p>
+        <p>Copy Right-2018</p>
+    </div>
+</block>
+<block name="script">
+    <script>
+    layui.use('carousel', function() {
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#test1',
+            width: '100%' //设置容器宽度
+                ,
+            arrow: 'always' //始终显示箭头
+                //,anim: 'updown' //切换动画方式
+                ,
+            height: '180px'
+        });
+
+        //建造实例
+        carousel.render({
+            elem: '#test2',
+            width: '100%' //设置容器宽度
+                ,
+            arrow: 'always' //始终显示箭头
+                //,anim: 'updown' //切换动画方式
+                ,
+            height: '20px',
+            indicator: 'none',
+            arrow: 'none',
+            anim: 'updown'
+        });
+    });
+    </script>
+</block>

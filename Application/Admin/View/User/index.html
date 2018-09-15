@@ -1,0 +1,92 @@
+<extend name="Public/base" />
+<block name="body">
+    <div class="main_option">
+        <ul>
+            <li id="add">新增</li>
+            <li class="batch" data-href="{:U('admindel')}">删除</li>
+            <li class="batch" data-href="{:U('adminforbid')}">禁用</li>
+            <li class="batch" data-href="{:U('adminopen')}">启用</li>
+            <eq name="back" value="1">
+                <li class="back" onclick="javascript:;window.history.back()">返回</li>
+            </eq>
+        </ul>
+        <div class="search">
+            <input type="text" name="nickname" class="search-input" value="{:I('nickname')}" placeholder="请输入用户昵称">
+            <button id="search" data-href="{:U('index')}" data-name="nickname">搜索</button>
+        </div>
+    </div>
+    <div class="content_list">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" class="check-all">序号</th>
+                    <th>头像</th>
+                    <th>用户名</th>
+                    <th>昵称</th>
+                    <th>添加时间</th>
+                    <th>上次修改时间</th>
+                    <th>上次登陆时间</th>
+                    <th>登录次数</th>
+                    <!-- <th>添加时间</th> -->
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <notempty name="adminlists">
+                    <volist name="adminlists" id="vo" key="i">
+                        <if condition="$i%2 eq 0">
+                            <tr>
+                                <else/>
+                                <tr class="addback">
+                        </if>
+                        <td>
+                            <input class="ids" type="checkbox" name="id[]" value="{$vo.uid}">{$i}</td>
+                        <td><img src="__PUBLIC__/images/avatar/{$vo.avatarurl}" onerror="javascript:;this.src='__PUBLIC__/images/avatar.jpg'"></td>
+                        <td>{$vo.username}</td>                     
+                        <td>{$vo.nickname}</td>
+                        <td>{$vo.create_time}</td>
+                        <td>{$vo.update_time}</td>
+                        <td>{$vo.last_login_time}</td>
+                        <td>{$vo.count}</td>
+                        <td>
+                            <eq name="vo.status" value="0">
+                                <a href="__URL__/adminopen/uid/{$vo.uid}" class="confirm ajax-get">启用</a>
+                                <else/>
+                                <a href="__URL__/adminforbid/uid/{$vo.uid}" class="confirm ajax-get">禁用</a>
+                            </eq>
+                            <span class="edit_option" data-href="{:U('adminedit?uid='.$vo['uid'])}" data-title="编辑管理员">编辑</span>
+                            <a href="__URL__/admindel/uid/{$vo.uid}" class="confirm ajax-get">删除</a>
+                        </td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="9" class="list_notice">列表空空如也！</td>
+                </notempty>
+            </tbody>
+        </table>
+    </div>
+    <div class="page">
+            {$_page}
+        </div>
+</block>
+<block name="script">
+    <script type="text/javascript">
+    $(".user_nav").attr("class", "active")
+    layui.use('layer', function() {
+        var lauer = layui.layer;
+        $("#add").click(function() {
+            layer.open({
+                type: 2,
+                title: '添加管理员',
+                shadeClose: true,
+                shade: [0.5, '#393D49'],
+                maxmin: false, //开启最大化最小化按钮
+                area: ['550px', '600px'],
+                // content: '{:U("add")}'
+                content: '{:U("adminadd")}'
+            });
+        })
+    })
+    </script>
+</block>

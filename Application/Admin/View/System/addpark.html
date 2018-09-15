@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>添加菜单</title>
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/style.css">
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/layui/css/layui.css">
+        <script type="text/javascript" src="__PUBLIC__/layui/layui.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/jquery-3.3.1.min.js"></script>
+    <style type="text/css">
+    .layui-input-inline,
+    .layui-input-block {
+        width: 400px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="iframe_box">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属小区</label>
+                <div class="layui-input-block">
+                    <select name="village_id" required lay-verify="required" lay-filter='villageselect' class="village">
+                        <notempty name="villagelists">
+                            <volist name="villagelists" id="vo">
+                                <option value="{$vo.id}">{$vo.name}</option>
+                            </volist>
+                        </notempty>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">车位号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="num" required lay-verify="required" placeholder="请输入车位号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+<script type="text/javascript">
+//Demo
+layui.use(['form','layer'], function() {
+    var form = layui.form;
+    var layer = layui.layer;
+    //监听提交
+    form.on('submit(submit)', function(data) {
+        console.log(data.field);
+        $.post("__URL__/addpark", data.field, function (res) {
+        	console.log(res)
+        	if(res.status == 1){
+        		layer.msg(res.info,{icon:1,offset: '70px'});
+        		setTimeout(()=>{
+        			parent.window.location.href="__URL__/park"
+        		},1000)
+        	}else{
+        		layer.msg(res.info,{icon:2,offset: '70px'});
+        	}
+        })
+        return false;
+    });
+});
+</script>
+
+</html>

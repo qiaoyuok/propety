@@ -1,0 +1,1 @@
+a:9:{i:0;s:2:"id";i:1;s:4:"room";i:2;s:9:"parent_id";i:3;s:3:"uid";i:4;s:9:"attribute";i:5;s:6:"profee";i:6;s:10:"village_id";s:3:"_pk";s:2:"id";s:5:"_type";a:7:{s:2:"id";s:16:"int(10) unsigned";s:4:"room";s:6:"int(5)";s:9:"parent_id";s:7:"int(11)";s:3:"uid";s:7:"int(11)";s:9:"attribute";s:10:"tinyint(1)";s:6:"profee";s:13:"decimal(10,0)";s:10:"village_id";s:7:"int(11)";}}

@@ -1,0 +1,33 @@
+<extend name="Public/base" />
+<block name="body">
+    <notempty name="complaintlist">
+        <div class="complaintlist">
+            <volist name="complaintlist" id="vo">
+                <div class="item" onclick="javascript:;window.location.href='__URL__/complaintdetail/id/{$vo.id}'">
+                    <div class="info">
+                        <div class="content">{$vo.content} </div>
+                        <p class="time">{$vo.create_time}</p>
+                    </div>
+                    <div class="status">
+                        <eq name="vo.status" value="0">
+                            <span style="color: red;">待处理</span>
+                            <else/>
+                            <span style="color: green;">已处理</span>
+                        </eq>
+                    </div>
+                </div>
+            </volist>
+        </div>
+        <else/>
+        <p class="msg">你还没有投诉记录</p>
+    </notempty>
+    <div class="addcom" onclick="javascript:;window.location.href='{:U(addcom)}'">
+        我要投诉
+    </div>
+</block>
+<block name="script">
+    <script>
+    // console.log($(window).height());
+    $(".complaintlist").css("height", $(window).height() - 135);
+    </script>
+</block>

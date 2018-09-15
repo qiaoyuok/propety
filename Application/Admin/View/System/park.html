@@ -1,0 +1,94 @@
+<extend name="Public/base" />
+<block name="body">
+    <div class="content-box">
+        <div class="main_option">
+            <ul>
+                <li id="add">新增</li>
+                <!-- <li class="batch" data-href="{:U('del')}">删除</li> -->
+                <eq name="back" value="1">
+                    <li class="back" onclick="javascript:;window.history.back()">返回</li>
+                </eq>
+            </ul>
+            <form class="mid layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属小区</label>
+                <div class="layui-input-block">
+                    <select name="village_id" required lay-verify="required" lay-filter='villageselect' class="village">
+                        <option value="0">全部</option>
+                        <notempty name="villagelists">
+                            <volist name="villagelists" id="vo">
+                                <eq name="vo.id" value="$village_id">
+                                    <option selected="selected" value="{$vo.id}">{$vo.name}</option>
+                                    <else/>
+                                    <option value="{$vo.id}">{$vo.name}</option>
+                                </eq>
+                            </volist>
+                        </notempty>
+                    </select>
+                </div>
+            </div>
+        </form>
+        </div>
+        <div style="width:100%;padding: 20px; background-color: #F2F2F2;box-sizing: border-box;overflow: auto;">
+            <div class="layui-row">
+                <notempty name="parklists">
+                    <volist name="parklists" id="vo" key="i">
+                        <if condition="$i%12 eq 1 && $i neq 1">
+                            <hr/>
+                            <br/>
+                        </if>
+                        <div class="layui-col-md1">
+                            <div class="layui-card">
+                                <div class="layui-card-header" style="text-align: center;background: #01AAED;color: #fff">{$vo.name}</div>
+                                <div class="layui-card-header" style="text-align: center;">{$vo.num}号停车位</div>
+                                <div class="layui-card-body edit_option" data-id="$vo['id']" data-href="{:U('editpark?id='.$vo['id'])}" data-title="配置停车位" style="text-align: center;">
+                                    <img class="car" src="__PUBLIC__/images/car.png">
+                                    <notempty name="vo.uuid">
+                                        <b class="carused">使用中</b>
+                                        <else/>
+                                        <b class="carempt">暂空</b>
+                                    </notempty>
+                                    <button class="layui-btn layui-btn-sm layui-btn-danger ajax-get" data-href="{:U('delpark?id='.$vo['id'])}">删除</button>
+                                </div>
+                            </div>
+                        </div>
+                    </volist>
+                    <else/>
+                    <p style="text-align:center;">列表空空如也！</p>
+                </notempty>
+            </div>
+        </div>
+        <div class="page">
+            {$_page}
+        </div>
+    </div>
+
+</block>
+<block name="script">
+    <script type="text/javascript">
+    $(".system_nav").attr("class", "active")
+    layui.use(['layer', 'element','form'], function() {
+        var lauer = layui.layer;
+        var form = layui.form;
+        $("#add").click(function() {
+            layer.open({
+                type: 2,
+                title: '添加菜单',
+                shadeClose: true,
+                shade: [0.5, '#393D49'],
+                maxmin: false, //开启最大化最小化按钮
+                area: ['550px', '600px'],
+                // content: '{:U("add")}'
+                content: '{:U("addpark")}'
+            });
+        })
+        
+
+        // 选择了小区，显示出该小区下的幢及该第一幢的所有单元
+        form.on('select(villageselect)', function(data) {
+            console.log("选择了", data)
+            window.location.href="__URL__/park/village_id/"+data.value;
+        });
+    })
+    </script>
+</block>

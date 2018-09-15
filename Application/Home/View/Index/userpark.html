@@ -1,0 +1,97 @@
+<extend name="Public/base" />
+<block name="body">
+    <notempty name="parklist">
+        <div class="parklist">
+            <volist name="parklist" id="vo" key="i">
+                <if condition="$i%2 eq 0">
+                    <div class="item">
+                        <else/>
+                        <div class="item line">
+                </if>
+                    <img class="car" src="__PUBLIC__/images/usercar.png">
+                    <div class="info">
+                        <p>所属小区：{$vo.name}</p>
+                        <p>停车位号：{$vo.num}号</p>
+                        <p>车位属性：<eq name="vo.status" value="0">租赁<else/>个人车位</eq></p>
+                        <eq name="vo.status" value="0">
+                            <p>车位状态：<eq name="vo.feestatus" value="1">
+                                <span style="color: green;">完成缴费</span><br/>缴费时间：<span style="font-size: 12px;color: gray;">{$vo.last_pay_time|strtime}</span>
+                                <else/>
+                                <span style="color: red;">等待缴费</span><br/><b style="color: red;">￥{$vo.fee}</b>
+                                <button class="layui-btn layui-btn-sm" style="height: 20px;line-height:20px;margin-left: 5px;" onclick="topay({$vo.fee},3,{$vo.id})">缴费</button>
+                            </eq></p>
+                            <else/>
+                            <p>车位状态：无需缴费</p>
+                        </eq>
+                    </div>
+                </div>
+            </volist>
+        </div>
+        <else/>
+        <p class="msg">暂无车位信息</p>
+    </notempty>
+</block>
+<block name="script">
+    <script>
+    layui.use("layer",function () {
+        var layer = layui.layer;
+        
+    })
+    function onBridgeReady(res) {
+        WeixinJSBridge.invoke(
+            'getBrandWCPayRequest',res,
+            function(res) {
+                if (res.err_msg == "get_brand_wcpay_request:ok") {
+                    layer.msg("支付成功")
+                    setTimeout(function (argument) {
+                        location.reload();
+                    },1000)
+                }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
+                    layer.msg("取消支付")
+                }else {
+                    layer.msg("支付失败")
+                }
+            }
+        );
+    }
+
+    function topay(total_fee='',flag='',num='') {
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        } else {
+            switch (flag) {
+                case 1:
+                    var name = "租房费用";
+                    break;
+                case 2:
+                    var name = "物业费用";
+                    break;
+                case 3:
+                    var name = "停车位费用";
+                    break;
+                default:
+                    return false;
+                    break;
+            }
+            var detail = '{"flag":'+flag+',"name":"'+name+'","num":'+num+'}';
+            $.post("__URL__/topay","total_fee="+total_fee+"&detail="+detail,function (res) {
+                console.log(res)
+                if (res.status == 1) {
+                    
+                    onBridgeReady(JSON.parse(res.info));
+
+                } else {
+
+                    layer.msg(res.info, { icon: 2, offset: '70px' });
+
+                }
+            })
+        }
+    }
+    </script>
+</block>

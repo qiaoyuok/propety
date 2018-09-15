@@ -1,0 +1,28 @@
+<extend name="Public/base" />
+<block name="body">
+    <div class="intro_box">
+        <div style="padding: 20px;">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card" style="height: 262px;margin-top: 52px;border-radius: 15px;">
+                        <div class="layui-card-header">物业名称：{$companyinfo['company_name']}</div>
+                        <div class="layui-card-header">物业地址：{$companyinfo['company_address']}</div>
+                        <div class="layui-card-header">负责　人：{$companyinfo['company_manager']}</div>
+                        <div class="layui-card-header">邮　　箱：{$companyinfo['company_email']}</div>
+                        <div class="layui-card-header">联系电话：{$companyinfo['company_tel']}</div>
+                        <div class="layui-card-header">物业介绍：{$companyinfo['company_des']}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script type="text/javascript">
+    $(".index_nav").attr("class", "active");
+    $(".sidebar").hide();
+    layui.use("layer",function() {
+        var layer = layui.layer;
+    })
+    </script>
+</block>

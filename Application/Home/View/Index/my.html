@@ -1,0 +1,25 @@
+<extend name="Public/base" />
+<block name="body">
+    <div class="header">
+        <img src="{$_SESSION['wxb8952d943b52bfe6']['headimgurl']}">
+        <div class="userinfobox">
+            <p>{$_SESSION['wxb8952d943b52bfe6']['nickname']}</p>
+            <div>
+                <if condition="$userinfo.status eq 1"><span onclick="window.location.href='{:U(checkuserinfo)}'">待认证</span><img onclick="window.location.href='{:U(checkuserinfo)}'" style="width: 20px;height: 20px;" src="__PUBLIC__/images/checkin.png"><elseif condition="$userinfo.status eq 2"/><span>已认证</span><else/><span>被拉黑</span></if>
+            </div>
+        </div>
+    </div>
+    <div class="list">
+        <ul>
+            <li onclick="window.location.href='{:U(userhome)}'"><img src="__PUBLIC__/images/home.png"><p>我的租房</p><img src="__PUBLIC__/images/in.png"></li>
+            <li onclick="window.location.href='{:U(userpark)}'"><img src="__PUBLIC__/images/park.png"><p>我的停车位</p><img src="__PUBLIC__/images/in.png"></li>
+            <li onclick="window.location.href='{:U(order)}'"><img src="__PUBLIC__/images/jiaoyi.png"><p>交易记录</p><img src="__PUBLIC__/images/in.png"></li>
+            <li onclick="window.location.href='{:U(about)}'"><img src="__PUBLIC__/images/about.png"><p>关于我们</p><img src="__PUBLIC__/images/in.png"></li>
+        </ul>
+    </div>
+</block>
+<block name="script">
+    <script>
+    
+    </script>
+</block>

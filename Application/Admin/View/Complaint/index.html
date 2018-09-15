@@ -1,0 +1,88 @@
+<extend name="Public/base" />
+<block name="body">
+    <div class="main_option">
+        <ul>
+            <li class="batch" data-href="{:U('dealed')}">确认处理</li>
+            <li class="batch" data-href="{:U('dealing')}">恢复处理</li>
+            <li class="batch" data-href="{:U('delete')}">删除</li>
+            <eq name="back" value="1">
+                <li class="back" onclick="javascript:;window.history.back()">返回</li>
+            </eq>
+        </ul>
+        <div class="search">
+            <input type="text" name="username" class="search-input" value="{:I('username')}" placeholder="请输入用户姓名">
+            <button id="search" data-href="{:U('index')}" data-name="username">搜索</button>
+        </div>
+    </div>
+    <div class="content_list">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" class="check-all">序号</th>
+                    <th>用户姓名</th>
+                    <th>手机号</th>
+                    <th>状态</th>
+                    <th>投诉内容</th>
+                    <th>添加时间</th>
+                    <th>上次修改时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <notempty name="complaintlists">
+                    <volist name="complaintlists" id="vo" key="i">
+                        <if condition="$i%2 eq 0">
+                            <tr>
+                                <else/>
+                                <tr class="addback">
+                        </if>
+                        <td>
+                            <input class="ids" type="checkbox" name="id[]" value="{$vo.id}">{$i}</td>               
+                        <td>{$vo.username}</td>
+                        <td>{$vo.tel}</td>
+                        <td><eq name="vo.status" value="1"><b style="color: green;">已处理</b><else/><b style="color: red;">待处理</b></eq></td>
+                        <td class="view_content" data-content="{$vo.content}" data-title="投诉内容">{$vo.content|strdeal}</td>
+                        <td>{$vo.create_time}</td>
+                        <td>{$vo.update_time}</td>
+                        <td>
+                            <eq name="vo.status" value="0">
+                                <a href="__URL__/dealed/id/{$vo.id}" class="confirm ajax-get">确认处理</a>
+                                <else/>
+                                <a href="__URL__/dealing/id/{$vo.id}" class="confirm ajax-get">恢复处理</a>
+                            </eq>
+                            <!-- <span class="edit_option" data-href="{:U('adminedit?uid='.$vo['uid'])}" data-title="编辑管理员">编辑</span> -->
+                            <a href="__URL__/delete/id/{$vo.id}" class="confirm ajax-get">删除</a>
+                        </td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="9" class="list_notice">列表空空如也！</td>
+                </notempty>
+            </tbody>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+<block name="script">
+    <script type="text/javascript">
+    $(".complaint_nav").attr("class", "active")
+    layui.use('layer', function() {
+        var lauer = layui.layer;
+        $("#add").click(function() {
+            layer.open({
+                type: 2,
+                title: '添加管理员',
+                shadeClose: true,
+                shade: [0.5, '#393D49'],
+                maxmin: false, //开启最大化最小化按钮
+                area: ['550px', '600px'],
+                // content: '{:U("add")}'
+                content: '{:U("adminadd")}'
+            });
+        })
+    })
+    </script>
+</block>

@@ -1,0 +1,22 @@
+[ 2018-05-17T14:37:48+08:00 ] 127.0.0.1 /index.php/Admin/Login/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000477s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000703s ]
+SQL: SHOW COLUMNS FROM `pro_admin` [ RunTime:0.1046s ]
+SQL: SELECT * FROM `pro_admin` WHERE ( username = 'admin' and status = 1 ) LIMIT 1   [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `pro_company` [ RunTime:0.0191s ]
+SQL: SELECT * FROM `pro_company`  [ RunTime:0.0008s ]
+
+[ 2018-05-17T20:38:34+08:00 ] 127.0.0.1 /index.php/Admin/Login/index
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000401s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000636s ]
+SQL: SHOW COLUMNS FROM `pro_admin` [ RunTime:0.0638s ]
+SQL: SELECT * FROM `pro_admin` WHERE ( username = 'admin' and status = 1 ) LIMIT 1   [ RunTime:0.0032s ]
+SQL: SHOW COLUMNS FROM `pro_company` [ RunTime:0.0244s ]
+SQL: SELECT * FROM `pro_company`  [ RunTime:0.0014s ]
+
+[ 2018-05-17T21:17:59+08:00 ] 127.0.0.1 /index.php/Admin/index/index.html
+ERR: 1146:Table 'market.pro_menu' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `pro_menu`
+

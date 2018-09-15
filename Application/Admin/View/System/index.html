@@ -1,0 +1,83 @@
+<extend name="Public/base" />
+<block name="body">
+    <div class="content-box">
+        <div class="main_option">
+            <ul>
+                <li id="add">新增</li>
+                <li class="batch" data-href="{:U('del')}">删除</li>
+                <eq name="back" value="1">
+                    <li class="back" onclick="javascript:;window.history.back()">返回</li>
+                </eq>
+            </ul>
+        </div>
+        <div class="content_list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" class="check-all">序号</th>
+                        <th>菜单名</th>
+                        <th>上级菜单</th>
+                        <th>分组</th>
+                        <th>地址</th>
+                        <th>排序</th>
+                        <th>是否隐藏</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <notempty name="menulists">
+                        <volist name="menulists" id="vo" key="i">
+                            <if condition="$i%2 eq 0">
+                                <tr>
+                                    <else/>
+                                    <tr class="addback">
+                            </if>
+                            <td>
+                                <input class="ids" type="checkbox" name="id[]" value="{$vo.id}">{$i}</td>
+                            <td><a href="{:U('index?parent_id='.$vo['id'])}">{$vo.title}</a></td>
+                            <td>{$vo.parent_text}</td>
+                            <td>{$vo.group}</td>
+                            <td>{$vo.url}</td>
+                            <td>{$vo.sort}</td>
+                            <td>
+                                <eq name="vo.hide" value='1'>隐藏
+                                    <else/><span style="color: #22876a">显示</span></eq>
+                            </td>
+                            <td>
+                                <span class="edit_option" data-href="{:U('edit?id='.$vo['id'])}" data-title="编辑菜单">编辑</span>
+                                <a href="__URL__/del/id/{$vo.id}" class="confirm ajax-get">删除</a>
+                            </td>
+                            </tr>
+                        </volist>
+                        <else/>
+                        <td colspan="9" class="list_notice">列表空空如也！</td>
+                    </notempty>
+                </tbody>
+            </table>
+        </div>
+        <div class="page">
+            {$_page}
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script type="text/javascript">
+    $(".system_nav").attr("class", "active")
+    layui.use('layer', function() {
+        var lauer = layui.layer;
+        $("#add").click(function() {
+            layer.open({
+                type: 2,
+                title: '添加菜单',
+                shadeClose: true,
+                shade: [0.5, '#393D49'],
+                maxmin: false, //开启最大化最小化按钮
+                area: ['550px', '600px'],
+                // content: '{:U("add")}'
+                content: '{:U("add")}'
+            });
+        })
+    })
+    </script>
+</block>

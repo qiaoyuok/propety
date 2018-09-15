@@ -1,0 +1,44 @@
+<extend name="Public/base" />
+<block name="body">
+    <form class="layui-form checkuserinfo" action="">
+        <div class="item">
+            <label>姓名</label>
+            <div>
+                <input type="text" name="username" required lay-verify="required" placeholder="请输入真实姓名" value="{$userinfo.username}" autocomplete="off">
+            </div>
+        </div>
+        <div class="item">
+            <label>手机</label>
+            <div>
+                <input type="text" name="tel" required lay-verify="required" placeholder="请输入手机号" value="{$userinfo['tel']}" autocomplete="off">
+            </div>
+        </div>
+        <notempty name="userinfo.username">
+            <p style="width: 100%;height: 35px;text-align: center;line-height: 35px;color: red;margin-top: 25px;">等待认证中...</p>
+            <else/>
+            <div class="item button">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">提交信息</button>
+            </div>
+        </notempty>
+    </form>
+</block>
+<block name="script">
+    <script>
+    layui.use('form', function() {
+        var form = layui.form;
+        //监听提交
+        form.on('submit(formDemo)', function(data) {
+            console.log(data.field);
+            $.post("__URL__/checkuserinfo", data.field, function(res) {
+
+                if (res.status == 1) {
+                    layer.msg(res.info, { icon: 1, offset: '70px' });
+                } else {
+                    layer.msg(res.info, { icon: 2, offset: '70px' });
+                }
+            })
+            return false;
+        });
+    });
+    </script>
+</block>

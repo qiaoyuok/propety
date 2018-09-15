@@ -1,0 +1,103 @@
+<extend name="Public/base" />
+<block name="body">
+    <div class="main_option">
+        <ul>
+            <li class="batch" data-href="{:U('todark')}">拉黑</li>
+            <li class="batch" data-href="{:U('help')}">解救</li>
+            <li class="batch" data-href="{:U('deluser')}">删除</li>
+            <eq name="back" value="1">
+                <li class="back" onclick="javascript:;window.history.back()">返回</li>
+            </eq>
+        </ul>
+        <div class="search">
+            <input type="text" name="nickname" class="search-input" value="{:I('nickname')}" placeholder="请输入用户昵称或姓名">
+            <button id="search" data-href="{:U('user')}" data-name="nickname">搜索</button>
+        </div>
+    </div>
+    <div class="content_list">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" class="check-all">序号</th>
+                        <th>用户昵称</th>
+                    <th>用户头像</th>
+                    
+                    <th>用户姓名</th>
+                    <th>手机号</th>
+                    <th>用户性别</th>
+                    <th>状态</th>
+                    <th>添加时间</th>
+                    <th>上次修改时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <notempty name="userlists">
+                    <volist name="userlists" id="vo" key="i">
+                        <if condition="$i%2 eq 0">
+                            <tr>
+                                <else/>
+                                <tr class="addback">
+                        </if>
+                        <td>
+                            <input class="ids" type="checkbox" name="id[]" value="{$vo.uid}">{$i}</td>
+                            <td>{$vo.nickname}</td>
+                        <td><img style="width: 35px;height: 35px;border-radius: 50%;" src="{$vo.headimgurl}"></td>
+                        
+                        <td>{$vo.username}</td>
+                        <td>{$vo.tel}</td>
+                        <td>
+                            <eq name="vo.sex" value="1">男
+                                <else/>女</eq>
+                        </td>
+                        <td>
+                            <if condition="$vo.status eq 1"><b style="color:#d4237a">待认证</b>
+                                <elseif condition="$vo.status eq 2" /><b style="color: green;">已认证</b>
+                                <else/><b style="color: red;">已拉黑</b></if>
+                        </td>
+                        <td>{$vo.create_time}</td>
+                        <td>{$vo.update_time}</td>
+                        <td>
+                            <if condition="$vo.status eq 1">
+                                <a href="__URL__/pass/uid/{$vo.uid}" class="confirm ajax-get">通过认证</a>
+                                <elseif condition="$vo.status eq 0"/>
+                                <a href="__URL__/help/uid/{$vo.uid}" class="confirm ajax-get">解救</a>
+                                <else/>
+                                <a href="__URL__/todark/uid/{$vo.uid}" class="confirm ajax-get">拉黑</a>
+                            </if>
+                            <span class="edit_option" data-href="{:U('edituser?uid='.$vo['uid'])}" data-title="编辑用户">编辑</span>
+                            <a href="__URL__/deluser/uid/{$vo.uid}" class="confirm ajax-get">删除</a>
+                        </td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="9" class="list_notice">列表空空如也！</td>
+                </notempty>
+            </tbody>
+        </table>
+    </div>
+    <div class="page">
+            {$_page}
+        </div>
+</block>
+<block name="script">
+    <script type="text/javascript">
+    $(".user_nav").attr("class", "active")
+    layui.use('layer', function() {
+        var lauer = layui.layer;
+        $("#add").click(function() {
+            layer.open({
+                type: 2,
+                title: '添加管理员',
+                shadeClose: true,
+                shade: [0.5, '#393D49'],
+                maxmin: false, //开启最大化最小化按钮
+                area: ['550px', '600px'],
+                // content: '{:U("add")}'
+                content: '{:U("adminadd")}'
+            });
+        })
+    })
+    </script>
+</block>

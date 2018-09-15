@@ -1,0 +1,103 @@
+<extend name="Public/base" />
+<block name="body">
+    <notempty name="rentlist">
+        <div class="homelist">
+            <volist name="rentlist" id="vo">
+                <div class="item">
+                    <img class="house" src="__PUBLIC__/images/house.png">
+                    <div class="info">
+                        <p>房间信息：{$vo.village_name}{$vo.build}幢{$vo.unit}单元{$vo.room}室</p>
+                        <p>房屋属性：
+                            <eq name="vo.status" value="0">租赁
+                                <else/>房东自住</eq>
+                        </p>
+                        <eq name="vo.status" value="0">
+                            <p>租房状态：
+                                <eq name="vo.rfeestatus" value="1"><span style="color: green;">完成缴费</span><span style="font-size: 12px;color: gray;margin-left: 5px;">{$vo.rlast_pay_time}</span>
+                                    <else/><span style="color: red;">等待缴费</span><b style="color: red;">￥{$vo.rfee}</b>
+                                    <button class="layui-btn layui-btn-sm" style="height: 20px;line-height:20px;margin-left: 5px;" onclick="topay({$vo.rfee},1,{$vo.room_id})">缴费</button>
+                                </eq>
+                            </p>
+                            <else/>
+                            <p>房屋状态：无需缴费</p>
+                        </eq>
+                        <p>物业费：
+                            <eq name="vo.pofeestatus" value="1"><span style="color: green;">完成缴费</span><span style="font-size: 12px;color: gray;margin-left: 5px;">{$vo.polast_pay_time}</span>
+                                <else/><span style="color: red;">等待缴费</span><b style="color: red;">￥{$vo.pofee}</b>
+                                <button class="layui-btn layui-btn-sm" style="height: 20px;line-height:20px;margin-left: 5px;" onclick="topay({$vo.pofee},2,{$vo.room_id})">缴费</button>
+                            </eq>
+                        </p>
+                    </div>
+                </div>
+            </volist>
+        </div>
+        <else/>
+        <p class="msg">暂无租房信息</p>
+    </notempty>
+</block>
+<block name="script">
+    <script>
+        layui.use("layer",function () {
+        var layer = layui.layer;
+        
+    })
+    function onBridgeReady(res) {
+        WeixinJSBridge.invoke(
+            'getBrandWCPayRequest', res,
+            function(res) {
+                
+                if (res.err_msg == "get_brand_wcpay_request:ok") {
+                    layer.msg("支付成功")
+                    setTimeout(function (argument) {
+                        location.reload();
+                    },1000)
+                }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
+                    layer.msg("取消支付")
+                }else {
+                    layer.msg("支付失败")
+                }
+            }
+        );
+    }
+
+    function topay(total_fee = '', flag = '', num = '') {
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        } else {
+            switch (flag) {
+                case 1:
+                    var name = "租房费用";
+                    break;
+                case 2:
+                    var name = "物业费用";
+                    break;
+                case 3:
+                    var name = "停车位费用";
+                    break;
+                default:
+                    return false;
+                    break;
+            }
+            var detail = '{"flag":' + flag + ',"name":"' + name + '","num":' + num + '}';
+            $.post("__URL__/topay", "total_fee=" + total_fee + "&detail=" + detail, function(res) {
+                console.log(res)
+                if (res.status == 1) {
+
+                    onBridgeReady(JSON.parse(res.info));
+
+                } else {
+
+                    layer.msg(res.info, { icon: 2, offset: '70px' });
+
+                }
+            })
+        }
+    }
+    </script>
+
+</block>

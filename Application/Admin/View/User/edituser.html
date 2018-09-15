@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>添加菜单</title>
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/style.css">
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/layui/css/layui.css">
+        <script type="text/javascript" src="__PUBLIC__/layui/layui.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/jquery-3.3.1.min.js"></script>
+    <style type="text/css">
+    .layui-input-inline,
+    .layui-input-block {
+        width: 400px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="iframe_box">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户昵称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="nickname" required lay-verify="required" value="{$userinfo['nickname']}" placeholder="请输入用户昵称" autocomplete="off" class="layui-input">
+                    <input type="text" name="uid" value="{$userinfo['uid']}" hidden="hidden">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户姓名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="username" required lay-verify="required" value="{$userinfo['username']}" placeholder="请输入用户姓名" autocomplete="off" class="layui-input">
+                </div>
+                <!-- <div class="layui-form-mid layui-word-aux">降序显示</div> -->
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户手机</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="tel" required lay-verify="required" value="{$userinfo['tel']}" placeholder="请输入用户手机" autocomplete="off" class="layui-input">
+                </div>
+                <!-- <div class="layui-form-mid layui-word-aux">如（User/index）</div> -->
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+<script type="text/javascript">
+//Demo
+layui.use(['form','layer'], function() {
+    var form = layui.form;
+    var layer = layui.layer;
+    //监听提交
+    form.on('submit(submit)', function(data) {
+        console.log(data.field);
+        $.post("__URL__/edituser", data.field, function (res) {
+        	console.log(res)
+        	if(res.status == 1){
+        		layer.msg(res.info,{icon:1,offset: '70px'});
+        		setTimeout(()=>{
+        			parent.window.location.href="__URL__/user"
+        		},1000)
+        	}else{
+        		layer.msg(res.info,{icon:2,offset: '70px'});
+        	}
+        })
+        return false;
+    });
+});
+</script>
+
+</html>

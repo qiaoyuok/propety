@@ -1,0 +1,93 @@
+<extend name="Public/base" />
+<block name="body">
+    <div class="set">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="company_name" required lay-verify="required" value="{$companyinfo['company_name']}" placeholder="请输入公司名称" autocomplete="company_name" class="layui-input">
+                </div>
+                <!-- <div class="layui-form-mid layui-word-aux">填写公司名称会在底部显示</div> -->
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">地址</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="company_address" placeholder="请输入公司地址" value="{$companyinfo['company_address']}" autocomplete="address" class="layui-input">
+                </div>
+                <!-- <div class="layui-form-mid layui-word-aux">填写公司所在地</div> -->
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">负责人</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="company_manager" placeholder="请输入公司负责人" value="{$companyinfo['company_manager']}" autocomplete="manager" class="layui-input">
+                </div>
+                <!-- <div class="layui-form-mid layui-word-aux">填写公司负责人</div> -->
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="company_email" placeholder="请输入公司邮箱" value="{$companyinfo['company_email']}" autocomplete="email" class="layui-input">
+                </div>
+                <!-- <div class="layui-form-mid layui-word-aux">填写公司负责人</div> -->
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="company_tel" placeholder="请输入公司电话"  value="{$companyinfo['company_tel']}" autocomplete="tel" class="layui-input">
+                </div>
+                <!-- <div class="layui-form-mid layui-word-aux">填写公司负责人</div> -->
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">公司介绍</label>
+                <div class="layui-input-block" style="width: 550px;">
+                    <textarea name="company_des" placeholder="请输入内容" class="layui-textarea">{$companyinfo['company_des']}</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="confirm">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</block>
+<block name="script">
+    <script type="text/javascript">
+    $(".system_nav").attr("class", "active")
+    layui.use(['layer', 'form'], function() {
+        var form = layui.form;
+        var lauer = layui.layer;
+        $("#add").click(function() {
+            layer.open({
+                type: 2,
+                title: '添加菜单',
+                shadeClose: true,
+                shade: [0.5, '#393D49'],
+                maxmin: false, //开启最大化最小化按钮
+                area: ['550px', '600px'],
+                // content: '{:U("add")}'
+                content: '{:U("add")}'
+            });
+        })
+
+
+        //监听提交
+        form.on('submit(confirm)', function(data) {
+            console.log(data.field)
+            $.post("__URL__/set", data.field, function(res) {
+
+                if (res.status == 1) {
+                    layer.msg(res.info, { icon: 1, offset: '70px' });
+                    setTimeout(() => {
+                        parent.window.location.href = "__URL__/{$option}"
+                    }, 1000)
+                } else {
+                    layer.msg(res.info, { icon: 2, offset: '70px' });
+                }
+            })
+            return false;
+        });
+    })
+    </script>
+</block>

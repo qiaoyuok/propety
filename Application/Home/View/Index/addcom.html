@@ -1,0 +1,47 @@
+<extend name="Public/base" />
+<block name="body">
+    <div class="addcom_box placeholder" contenteditable="true">
+    </div>
+    <div class="submit">提交投诉</div>
+</block>
+<block name="script">
+    <script>
+    layui.use("layer", function() {
+        var layer = layui.layer;
+        var length = 0;
+        var content = '';
+        $(".addcom_box").keydown(function(event) {
+            content = $(".addcom_box").html();
+            length = content.length;
+            console.log(length)
+            if (length != 0) {
+                $(".addcom_box").attr("class", "addcom_box")
+            } else {
+                $(".addcom_box").attr("class", "addcom_box placeholder")
+            }
+        });
+
+        $(".submit").click(function() {
+
+            if (length < 5) {
+                layer.msg("投诉内容长度不低于5个字符");
+                return false;
+            }
+            content = $(".addcom_box").html();
+            console.log(content)
+
+            $.post("__URL__/addcom","content="+content,function (res) {
+                console.log(res)
+                if (res.status == 1) {
+                    layer.msg(res.info, { icon: 1, offset: '70px' });
+                    setTimeout(()=>{
+                        window.location.href=document.referrer;
+                    },1000)
+                } else {
+                    layer.msg(res.info, { icon: 2, offset: '70px' });
+                }
+            })
+        })
+    })
+    </script>
+</block>

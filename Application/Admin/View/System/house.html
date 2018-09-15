@@ -1,0 +1,143 @@
+<extend name="Public/base" />
+<block name="body">
+    <div class="main_option">
+        <ul>
+            <li id="add">新增</li>
+            <li class="batch" data-href="{:U('delroom')}">删除</li>
+            <eq name="back" value="1">
+                <li class="back" onclick="javascript:;window.history.back()">返回</li>
+            </eq>
+        </ul>
+        <form class="mid layui-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属小区</label>
+                <div class="layui-input-block">
+                    <select name="village_id" required lay-verify="required" lay-filter='villageselect' class="village">
+                        <option value="0">全部</option>
+                        <notempty name="villagelists">
+                            <volist name="villagelists" id="vo">
+                                <eq name="vo.id" value="$village_id">
+                                    <option selected="selected" value="{$vo.id}">{$vo.name}</option>
+                                    <else/>
+                                    <option value="{$vo.id}">{$vo.name}</option>
+                                </eq>
+                            </volist>
+                        </notempty>
+                    </select>
+                </div>
+            </div>
+        </form>
+        <div class="search">
+            <input type="text" name="room_num" class="search-input" value="{:I('room_num')}" placeholder="请输入房号">
+            <button id="search" data-href="{:U('house')}" data-name="room_num">搜索</button>
+        </div>
+    </div>
+    <div class="content_list">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" class="check-all">序号</th>
+                    <th>小区</th>
+                    <th>第几幢</th>
+                    <neq name="flag" value="1">
+                        <th>单元号</th>
+                    </neq>
+                    <eq name="flag" value="3">
+                        <th>房间号</th>
+                        <th>状态</th>
+                        <th>房屋类型</th>
+                    </eq>
+                    <neq name="flag" value="3">
+                        <th>总房间数</th>
+                        <th>空房间数</th>
+                        <th>在用房间数</th>
+                    </neq>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <notempty name="roomlists">
+                    <volist name="roomlists" id="vo" key="i">
+                        <if condition="$i%2 eq 0">
+                            <tr>
+                                <else/>
+                                <tr class="addback">
+                        </if>
+                        <td>
+                            <input class="ids" type="checkbox" name="id[]" value="{$vo.id}">{$i}
+                        </td>
+                        <td>
+                            {$vo.name}
+                        </td>
+                        <td>
+                            <eq name="flag" value="1"><a href="{:U('house?parent_id='.$vo['id'].'&flag='.($flag+1).'&village_id='.$vo['village_id'])}">第{$vo.room}幢</a>
+                                <else/>第{$build}幢</eq>
+                        </td>
+                        <neq name="flag" value="1">
+                            <td>
+                                <eq name="flag" value="2"><a href="{:U('house?parent_id='.$vo['id'].'&flag='.($flag+1).'&village_id='.$vo['village_id'])}">第{$vo.room}单元</a>
+                                    <else/>第{$unit}单元</eq>
+                            </td>
+                        </neq>
+                        <eq name="flag" value="3">
+                            <td>{$vo.room}室</td>
+                            <td>
+                                <eq name="vo.uid" value="0"><b style="color: green;">空</b>
+                                    <else/><b style="color: red;">使用中</b></eq>
+                            </td>
+                            <td>
+                                <eq name="vo.attribute" value="1">房东自住
+                                    <else/>租赁</eq>
+                            </td>
+                        </eq>
+                        <neq name="flag" value="3">
+                            <td>{$vo.allcount}</td>
+                            <td>{$vo['allcount'] - $vo['used']}</td>
+                            <td>{$vo.used}</td>
+                        </neq>
+                        <td>
+                            <eq name="flag" value="3">
+                                <span class="edit_option" data-href="{:U('editroom?id='.$vo['id'])}" data-title="配置房间">配置房间</span>
+                            </eq>
+                            <a href="__URL__/delroom/id/{$vo.id}" class="confirm ajax-get">删除</a>
+                        </td>
+                        </tr>
+                    </volist>
+                    <else/>
+                    <td colspan="9" class="list_notice">列表空空如也！</td>
+                </notempty>
+            </tbody>
+        </table>
+    </div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+<block name="script">
+    <script type="text/javascript">
+    $(".system_nav").attr("class", "active");
+
+    layui.use(['layer','element','form'] ,function() {
+        var layer = layui.layer;
+        var form = layui.form;
+        $("#add").click(function() {
+            layer.open({
+                type: 2,
+                title: '添加房间',
+                shadeClose: true,
+                shade: [0.5, '#393D49'],
+                maxmin: false, //开启最大化最小化按钮
+                area: ['550px', '600px'],
+                // content: '{:U("add")}'
+                content: '{:U("addroom")}'
+            });
+        })
+         // 选择了小区，显示出该小区下的幢及该第一幢的所有单元
+        form.on('select(villageselect)', function(data) {
+            console.log("选择了", data)
+            window.location.href="__URL__/house/village_id/"+data.value;
+        });
+    })
+    </script>
+</block>

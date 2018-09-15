@@ -1,0 +1,128 @@
+[ 2018-05-25T21:39:27+08:00 ] 127.0.0.1 /index.php/Admin/Order/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000053s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005434s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001251s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001349s ]
+
+[ 2018-05-25T21:39:27+08:00 ] 127.0.0.1 /index.php/Admin/Login/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000254s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000608s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000662s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.002711s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.002776s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010598s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010654s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000321s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000348s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000680s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000721s ]
+
+[ 2018-05-25T21:39:28+08:00 ] 127.0.0.1 /index.php/Admin/Login/getCode
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000535s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001423s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001670s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000722s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000795s ]
+
+[ 2018-05-25T21:39:46+08:00 ] 127.0.0.1 /index.php/Admin/Login/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000276s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000474s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000505s ]
+SQL: SHOW COLUMNS FROM `pro_admin` [ RunTime:0.1104s ]
+SQL: SELECT * FROM `pro_admin` WHERE ( username = 'admin' and status = 1 ) LIMIT 1   [ RunTime:0.0037s ]
+SQL: SHOW COLUMNS FROM `pro_company` [ RunTime:0.0427s ]
+SQL: SELECT * FROM `pro_company`  [ RunTime:0.0004s ]
+
+[ 2018-05-25T21:39:46+08:00 ] 127.0.0.1 /index.php/Admin/Index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000391s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000608s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000658s ]
+SQL: SHOW COLUMNS FROM `pro_menu` [ RunTime:0.0326s ]
+SQL: SELECT * FROM `pro_menu` WHERE ( hide = 0 ) ORDER BY sort desc  [ RunTime:0.0054s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000218s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000359s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.037856s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.038050s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001755s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001904s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003038s ]
+INFO: [ app_end ] --END-- [ RunTime:0.003198s ]
+
+[ 2018-05-25T21:39:49+08:00 ] 127.0.0.1 /index.php/Admin/Fee/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000414s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000518s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000550s ]
+SQL: SHOW COLUMNS FROM `pro_menu` [ RunTime:0.0054s ]
+SQL: SELECT * FROM `pro_menu` WHERE ( hide = 0 ) ORDER BY sort desc  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `pro_rent` [ RunTime:0.1006s ]
+SQL: SHOW COLUMNS FROM `pro_rent` [ RunTime:0.0059s ]
+SQL: SELECT COUNT(*) AS tp_count FROM pro_rent r,pro_pro po,pro_user u WHERE ( u.uid = r.uid and r.room_id = po.room_num and u.username like '%%' ) LIMIT 1   [ RunTime:0.0186s ]
+SQL: SHOW COLUMNS FROM `pro_rent` [ RunTime:0.0093s ]
+SQL: SELECT u.*,po.fee pofee,po.out_time poout_time,po.last_pay_time polast_pay_time,r.fee rfee,r.out_time rout_time,r.status rstatus,r.id,r.last_pay_time rlast_pay_time FROM pro_rent r,pro_pro po,pro_user u WHERE ( u.uid = r.uid and r.room_id = po.room_num and u.username like '%%' ) LIMIT 0,10   [ RunTime:0.0012s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000207s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000326s ]
+NOTIC: [8] Undefined variable: back C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Admin\f043af71b08e3e57c85ffa1b0054e72b.php 第 55 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.037629s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.037789s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001166s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001264s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002596s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002786s ]
+
+[ 2018-05-25T21:39:51+08:00 ] 127.0.0.1 /index.php/Admin/Fee/feedetail/id/20.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000465s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000569s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000637s ]
+SQL: SHOW COLUMNS FROM `pro_menu` [ RunTime:0.0039s ]
+SQL: SELECT * FROM `pro_menu` WHERE ( hide = 0 ) ORDER BY sort desc  [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `pro_user` [ RunTime:0.0046s ]
+SQL: SHOW COLUMNS FROM `pro_rent` [ RunTime:0.0037s ]
+SQL: SELECT u.*,po.fee pofee,po.out_time poout_time,po.last_pay_time polast_pay_time,r.fee rfee,r.out_time rout_time,r.status rstatus,r.last_pay_time rlast_pay_time,ro.room FROM pro_rent r,pro_pro po,pro_user u,pro_room ro WHERE ( r.id = 20 and r.room_id = po.room_num and r.uid = u.uid and ro.id = room_id ) LIMIT 1   [ RunTime:0.1118s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000096s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000187s ]
+NOTIC: [8] Undefined index: id C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Admin\2655e6b385f6258fe7011842d82867d0.php 第 25 行.
+NOTIC: [8] Undefined index: id C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Admin\2655e6b385f6258fe7011842d82867d0.php 第 32 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006961s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006995s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000283s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000309s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000483s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000512s ]
+

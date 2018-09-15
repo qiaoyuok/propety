@@ -1,0 +1,99 @@
+[ 2018-06-04T18:23:13+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000569s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000919s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000957s ]
+NOTIC: [8] Undefined index: wxb8952d943b52bfe6 C:\Users\15899\Desktop\Property\Application\Home\Controller\BaseController.class.php 第 27 行.
+SQL: SHOW COLUMNS FROM `pro_company` [ RunTime:0.0354s ]
+SQL: SELECT * FROM `pro_company`  [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `pro_announce` [ RunTime:0.0295s ]
+SQL: SELECT * FROM `pro_announce` WHERE ( status = 1 ) ORDER BY create_time desc  [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `pro_news` [ RunTime:0.0207s ]
+SQL: SELECT * FROM `pro_news` WHERE ( status = 1 ) ORDER BY create_time desc  [ RunTime:0.0007s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000143s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000261s ]
+NOTIC: [8] Undefined variable: meta_title C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 26 行.
+NOTIC: [8] Use of undefined constant index - assumed 'index' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 57 行.
+NOTIC: [8] Use of undefined constant complaint - assumed 'complaint' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 58 行.
+NOTIC: [8] Use of undefined constant msg - assumed 'msg' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 59 行.
+NOTIC: [8] Use of undefined constant device - assumed 'device' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 60 行.
+NOTIC: [8] Use of undefined constant my - assumed 'my' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 61 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022696s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022782s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001671s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001747s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001940s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001989s ]
+
+[ 2018-06-04T18:23:14+08:00 ] 127.0.0.1 HTTP://property.com/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000331s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000704s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000739s ]
+NOTIC: [8] Undefined index: wxb8952d943b52bfe6 C:\Users\15899\Desktop\Property\Application\Home\Controller\BaseController.class.php 第 27 行.
+SQL: SHOW COLUMNS FROM `pro_company` [ RunTime:0.0048s ]
+SQL: SELECT * FROM `pro_company`  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `pro_announce` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `pro_announce` WHERE ( status = 1 ) ORDER BY create_time desc  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `pro_news` [ RunTime:0.0032s ]
+SQL: SELECT * FROM `pro_news` WHERE ( status = 1 ) ORDER BY create_time desc  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000056s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000086s ]
+NOTIC: [8] Undefined variable: meta_title C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 26 行.
+NOTIC: [8] Use of undefined constant index - assumed 'index' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 57 行.
+NOTIC: [8] Use of undefined constant complaint - assumed 'complaint' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 58 行.
+NOTIC: [8] Use of undefined constant msg - assumed 'msg' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 59 行.
+NOTIC: [8] Use of undefined constant device - assumed 'device' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 60 行.
+NOTIC: [8] Use of undefined constant my - assumed 'my' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 61 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008076s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008112s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000690s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000742s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001239s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001296s ]
+
+[ 2018-06-04T18:23:15+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000322s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001274s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001309s ]
+NOTIC: [8] Undefined index: wxb8952d943b52bfe6 C:\Users\15899\Desktop\Property\Application\Home\Controller\BaseController.class.php 第 27 行.
+SQL: SHOW COLUMNS FROM `pro_company` [ RunTime:0.0052s ]
+SQL: SELECT * FROM `pro_company`  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `pro_announce` [ RunTime:0.0035s ]
+SQL: SELECT * FROM `pro_announce` WHERE ( status = 1 ) ORDER BY create_time desc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `pro_news` [ RunTime:0.0031s ]
+SQL: SELECT * FROM `pro_news` WHERE ( status = 1 ) ORDER BY create_time desc  [ RunTime:0.0002s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000051s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000083s ]
+NOTIC: [8] Undefined variable: meta_title C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 26 行.
+NOTIC: [8] Use of undefined constant index - assumed 'index' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 57 行.
+NOTIC: [8] Use of undefined constant complaint - assumed 'complaint' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 58 行.
+NOTIC: [8] Use of undefined constant msg - assumed 'msg' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 59 行.
+NOTIC: [8] Use of undefined constant device - assumed 'device' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 60 行.
+NOTIC: [8] Use of undefined constant my - assumed 'my' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 61 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007876s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007909s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000560s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000588s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000733s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000762s ]
+

@@ -1,0 +1,17 @@
+<extend name="Public/base" />
+<block name="body">
+    <div class="msgdetail">
+        <p class="time" style="border-bottom: none;">提交报修时间：{$devicedetail.create_time}</p>
+        <p class="time">报修状态：
+            <eq name="devicedetail.status" value="0"><span style="color: red;">待处理</span>
+                <else/><span style="color: green;">已处理　　</span>处理时间:{$devicedetail.update_time}</eq>
+        </p>
+        <div class="content">
+            {$devicedetail.content}
+        </div>
+    </div>
+</block>
+<block name="script">
+    <script>
+    </script>
+</block>

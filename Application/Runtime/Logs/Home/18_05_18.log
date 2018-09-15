@@ -1,0 +1,30 @@
+[ 2018-05-18T15:47:25+08:00 ] 127.0.0.1 /index.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000442s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000741s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000793s ]
+NOTIC: [8] Undefined index: wxb8952d943b52bfe6 C:\Users\15899\Desktop\Property\Application\Home\Controller\BaseController.class.php 第 27 行.
+SQL: SHOW COLUMNS FROM `pro_company` [ RunTime:0.0058s ]
+SQL: SELECT * FROM `pro_company`  [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `pro_announce` [ RunTime:0.0034s ]
+SQL: SELECT * FROM `pro_announce` WHERE ( status = 1 ) ORDER BY create_time desc  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000058s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000097s ]
+NOTIC: [8] Undefined variable: meta_title C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 26 行.
+NOTIC: [8] Use of undefined constant msg - assumed 'msg' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 47 行.
+NOTIC: [8] Use of undefined constant complaint - assumed 'complaint' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 50 行.
+NOTIC: [8] Use of undefined constant device - assumed 'device' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 53 行.
+NOTIC: [8] Use of undefined constant my - assumed 'my' C:\Users\15899\Desktop\Property\Application\Runtime\Cache\Home\2a94b8bda04ff446dcedd42276fc99ee.php 第 56 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007401s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007442s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000377s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000403s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000485s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000514s ]
+

@@ -1,0 +1,20 @@
+<extend name="Public/base" />
+<block name="body">
+    <notempty name="orderlist">
+        <div class="orderlist">
+            <volist name="orderlist" id="vo">
+                <div class="item">
+                    <p class="title">缴费项目：{$vo.name}　{$vo.des}　<span style="color: red;float: right;">金额：{$vo.total_fee}￥</span></p>
+                    <!-- <p class="des">{$vo.des}</p> -->
+                    <p class="time">订单号：{$vo.sn}</p>
+                    <p class="time">缴费时间：{$vo.update_time}</p>
+                </div>
+            </volist>
+        </div>
+        <else/>
+        <p class="msg">暂无消息</p>
+    </notempty>
+</block>
+<block name="script">
+
+</block>

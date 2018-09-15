@@ -1,0 +1,19 @@
+<extend name="Public/base" />
+<block name="body">
+    <div class="aboutbox">
+        <div class="logo">
+            <img src="__PUBLIC__/images/logo.png">
+        </div>
+        <ul class="aboutlist">
+            <li>物业名称：<span>{$_SESSION['company']['company_name']}</span></li>
+            <li>物业地址：<span>{$_SESSION['company']['company_address']}</span></li>
+            <li>负责　人：<span>{$_SESSION['company']['company_manager']}</span></li>
+            <li>物业邮箱：<span>{$_SESSION['company']['company_email']}</span></li>
+            <li>物业电话：<span>{$_SESSION['company']['company_tel']}</span></li>
+        </ul>
+    </div>
+</block>
+<block name="script">
+    <script>
+    </script>
+</block>

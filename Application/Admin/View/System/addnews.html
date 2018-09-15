@@ -1,0 +1,73 @@
+<extend name="Public/base" />
+<block name='style'>
+    <link href="/editor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/editor/third-party/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/editor/umeditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/editor/umeditor.min.js"></script>
+    <script type="text/javascript" src="/editor/lang/zh-cn/zh-cn.js"></script>
+</block>
+<block name="body">
+    <div class="set">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">新闻标题</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="title" required lay-verify="required" placeholder="请输入新闻标题" autocomplete="company_name" class="layui-input">
+                </div>
+                <!-- <div class="layui-form-mid layui-word-aux">填写公司名称会在底部显示</div> -->
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">作者</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="author" placeholder="请输入作者名称" autocomplete="address" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item" style="height:350px;overflow: auto;">
+                <label class="layui-form-label">新闻内容</label>
+                <div class="layui-input-block">
+                    <script type="text/plain" name="content" id="myEditor" style="width:700px;max-height:340px;overflow: auto;">
+                        <p>在这里输入新闻内容</p>
+                    </script>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="confirm">立即提交</button>
+                    <button class="layui-btn layui-btn-primary" onclick="javascript:;window.history.go(-1)">返回</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</block>
+<block name="script">
+   
+   <script type="text/javascript">
+        //实例化编辑器
+        var um = UM.getEditor('myEditor');
+    </script>
+   
+    <script type="text/javascript">
+    $(".system_nav").attr("class", "active")
+    layui.use(['layer', 'form'], function() {
+        var form = layui.form;
+        var layer = layui.layer;
+
+        //监听提交
+        form.on('submit(confirm)', function(data) {
+            // console.log(data.field);return false;
+            $.post("__URL__/addnews", data.field, function(res) {
+
+                if (res.status == 1) {
+                    layer.msg(res.info, { icon: 1, offset: '70px' });
+                    setTimeout(() => {
+                        parent.window.location.href = "__URL__/news"
+                    }, 1000)
+                } else {
+                    layer.msg(res.info, { icon: 2, offset: '70px' });
+                }
+            })
+            return false;
+        });
+    })
+    </script>
+</block>

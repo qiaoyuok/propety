@@ -1,0 +1,13 @@
+<extend name="Public/base" />
+<block name="body">
+    <div class="msgdetail">
+        <h3>{$newsdetail.title}</h3>
+        <p class="time">作者：<empty name="newsdetail['author']">迭名<else/>{$newsdetail.author}</empty>　　编辑时间：{$newsdetail.create_time}</p>
+        <div class="content">
+            　　{$newsdetail.content}
+        </div>
+    </div>
+</block>
+<block name="script">
+    
+</block>

@@ -1,0 +1,19 @@
+<extend name="Public/base" />
+<block name="body">
+    <notempty name="msglist">
+        <div class="msglist">
+            <volist name="msglist" id="vo">
+                <div class="item" onclick="javascript:;window.location.href='__URL__/msgdetail/id/{$vo.id}'">
+                    <p class="title">{$vo.title}：<span>{$vo.content|strdeal}</span></p>
+                    <p class="time">{$vo.create_time}</p>
+                    <eq name="vo.status" value="0"><img src="__PUBLIC__/images/new.png"></eq>
+                </div>
+            </volist>
+        </div>
+        <else/>
+        <p class="msg">暂无消息</p>
+    </notempty>
+</block>
+<block name="script">
+   
+</block>

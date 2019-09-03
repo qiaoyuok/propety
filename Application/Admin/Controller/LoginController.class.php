@@ -105,4 +105,10 @@ class LoginController extends Controller {
         unset($_SESSION['admininfo']);
         return ;
     }
+
+    public function Token()
+    {
+        var_dump(111);
+        exit;
+    }
 }
